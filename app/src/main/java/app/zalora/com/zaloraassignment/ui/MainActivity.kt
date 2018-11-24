@@ -7,39 +7,41 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.util.Log.e
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
-
+import android.widget.Toast
 import butterknife.BindView
 import com.mathi.recyclerviewsample.CustomAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.ArrayList
-import android.support.v4.app.NavUtils
 import app.zalora.com.zaloraassignment.R
-import app.zalora.com.zaloraassignment.TweetEntity
+import app.zalora.com.zaloraassignment.model.TweetEntity
+import app.zalora.com.zaloraassignment.presenter.MainPresenter
+import app.zalora.com.zaloraassignment.view.MainView
+import butterknife.ButterKnife
 
 
-class MainActivity : AppCompatActivity()  {
+class MainActivity : AppCompatActivity(), MainView {
 
     internal var dataList: ArrayList<TweetEntity>? = null
     internal var customAdapter: CustomAdapter? = null
     internal var RESULT_CODE = 5;
-    @BindView(R.id.recycler_view) @JvmField var androidRecyclerView: RecyclerView? = null
+    private val mainPresenter = MainPresenter(this)
+    @BindView(R.id.recycler_view)
+    lateinit var androidRecyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ButterKnife.bind(this)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
             var intent = Intent(this, WriteTweetActivity::class.java)
             startActivityForResult(intent, RESULT_CODE)
         }
+
         dataList = ArrayList<TweetEntity>()
     }
 
@@ -47,7 +49,7 @@ class MainActivity : AppCompatActivity()  {
         customAdapter = CustomAdapter(this@MainActivity, dataList!!)
         val mLayoutManager = LinearLayoutManager(applicationContext)
         androidRecyclerView?.layoutManager = mLayoutManager;
-       androidRecyclerView!!.layoutManager = mLayoutManager
+        androidRecyclerView!!.layoutManager = mLayoutManager
         androidRecyclerView?.adapter = customAdapter
     }
 
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity()  {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             android.R.id.home -> {
-               finish()
+                finish()
                 return true
             }
             R.id.action_settings -> true
@@ -76,11 +78,24 @@ class MainActivity : AppCompatActivity()  {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == RESULT_CODE) {
                 var resultString: String = data!!.getStringExtra("tweet-data")
-                e("message ",resultString);
+                mainPresenter.processTweetData(resultString)
             }
         }
     }
 
+    override fun hideProgress() {
+    }
 
+    override fun setItems(tweetList: ArrayList<TweetEntity>) {
+        dataList = tweetList
+        setupAdaptar()
+    }
+
+    override fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showProgress() {
+    }
 
 }

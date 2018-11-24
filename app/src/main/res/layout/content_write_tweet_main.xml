@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".WriteTweetActivity"
+    tools:context="app.zalora.com.zalora.WriteTweetActivity"
     tools:showIn="@layout/activity_write_tweet_main">
 
     <EditText
@@ -15,8 +15,7 @@
         android:layout_marginRight="20dp"
         android:layout_height="wrap_content"
         android:hint="@string/write_your_tweet"
-        android:text="I can't believe Tweeter now supports
-         chunking my messages, so Idon't have to do it myself."
+
         />
 
 </android.support.constraint.ConstraintLayout>

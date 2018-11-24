@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import app.zalora.com.zaloraassignment.R
-import app.zalora.com.zaloraassignment.TweetEntity
+import app.zalora.com.zaloraassignment.model.TweetEntity
 
 class CustomAdapter(internal var context: Context, internal var androidList: List<TweetEntity>)
     : RecyclerView.Adapter<CustomViewHolder>() {
