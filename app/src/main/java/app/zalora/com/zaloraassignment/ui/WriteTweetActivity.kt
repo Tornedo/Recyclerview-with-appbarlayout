@@ -4,20 +4,24 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import app.zalora.com.zaloraassignment.R
+import butterknife.BindView
+import butterknife.ButterKnife
 
 class WriteTweetActivity : AppCompatActivity() {
 
-    internal var inputText: EditText? = null
+    @BindView(R.id.tweetContentEditTExt)
+    lateinit var inputText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_tweet_main)
-        inputText = findViewById(R.id.tweetContentEditTExt)
+        ButterKnife.bind(this)
         getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
         getSupportActionBar()!!.setDisplayShowHomeEnabled(true);
     }
@@ -42,10 +46,11 @@ class WriteTweetActivity : AppCompatActivity() {
     }
 
     private fun doneClick() {
-        var intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("tweet-data", inputText!!.text.toString())
-        Log.e("data ", inputText!!.text.toString())
-        setResult(Activity.RESULT_OK, intent)
-        finish()
+        if (!TextUtils.isEmpty(inputText.text.toString())){
+            var intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("tweet-data", inputText!!.text.toString())
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 }

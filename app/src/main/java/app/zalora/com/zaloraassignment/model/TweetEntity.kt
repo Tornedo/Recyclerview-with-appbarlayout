@@ -1,4 +1,4 @@
-package app.zalora.com.zaloraassignment
+package app.zalora.com.zaloraassignment.model
 
 
 
