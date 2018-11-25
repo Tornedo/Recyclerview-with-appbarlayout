@@ -3,11 +3,9 @@ package app.zalora.com.zalora
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log.e
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -45,7 +43,8 @@ class MainActivity : AppCompatActivity(), MainView {
         dataList = ArrayList<TweetEntity>()
     }
 
-    private fun setupAdaptar() {
+    private fun setupAdaptar( ) {
+
         customAdapter = CustomAdapter(this@MainActivity, dataList!!)
         val mLayoutManager = LinearLayoutManager(applicationContext)
         androidRecyclerView?.layoutManager = mLayoutManager;
@@ -87,8 +86,8 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun setItems(tweetList: ArrayList<TweetEntity>) {
-        dataList = tweetList
-        setupAdaptar()
+        dataList?.addAll(0, tweetList);
+        setupAdaptar( )
     }
 
     override fun showMessage(message: String) {

@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="app.zalora.com.zalora.WriteTweetActivity"></activity>
+        <activity android:name="app.zalora.com.zalora.WriteTweetActivity"
+            android:label="@string/write_tweet_activity_tittle"
+            ></activity>
     </application>
 
 </manifest>
