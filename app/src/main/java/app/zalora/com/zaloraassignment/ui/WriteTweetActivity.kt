@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import app.zalora.com.zaloraassignment.R
+import app.zalora.com.zaloraassignment.R.id.toolbar
 import butterknife.BindView
 import butterknife.ButterKnife
 
@@ -21,9 +22,11 @@ class WriteTweetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_tweet_main)
+
+
         ButterKnife.bind(this)
-        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar()!!.setDisplayShowHomeEnabled(true);
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true);
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -41,6 +44,11 @@ class WriteTweetActivity : AppCompatActivity() {
                 doneClick()
                 return true;
             }
+            android.R.id.home -> {
+               finish()
+                return true;
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
