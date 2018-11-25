@@ -5,16 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/card_view"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/dp_5"
     card_view:cardBackgroundColor="#81C784"
 
-    card_view:cardElevation="3dp"
-    card_view:contentPadding="4dp" >
+    card_view:cardElevation="@dimen/dp_3"
+    card_view:contentPadding="@dimen/dp_4" >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp" >
+        android:padding="@dimen/dp_16" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
             android:text="this is a chayon where are you your
             job is confir is not"
             android:layout_alignParentTop="true"
-            android:textSize="20sp" />
+            android:textSize="@dimen/sp_20" />
 
 
     </RelativeLayout>
